@@ -2,33 +2,28 @@ package com.mario.odyssey.detector
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.mario.odyssey.detector.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        binding.startButton.setOnClickListener {
+        val startButton = findViewById<Button>(R.id.startButton)
+        val exitButton = findViewById<Button>(R.id.exitButton)
+        val infoText = findViewById<TextView>(R.id.infoText)
+
+        infoText.text = "Mario Odyssey Scanner\n\nEchtzeitErkennung von:\n• Mario\n• Münzen\n• Gegenstände\n• Gegner"
+
+        startButton.setOnClickListener {
             startActivity(Intent(this, DetectionActivity::class.java))
         }
 
-        binding.infoText.text = """
-            Mario Odyssey Echtzeit-Objekterkennung
-            
-            Diese App erkennt in Echtzeit:
-            • Mario
-            • Münzen
-            • Gegenstände
-            • Gegner
-            • Andere Entitys
-            
-            Tippe "Start" um zu beginnen!
-        """.trimIndent()
+        exitButton.setOnClickListener {
+            finish()
+        }
     }
 }
